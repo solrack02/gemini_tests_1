@@ -132,8 +132,11 @@ xmlns="http://www.w3.org/2000/svg"
             args,
           }}/>
         , () => {
+  const [sttInput, setInput] = React.useState("");
+
   // ---- Sua Chave Gemini Aqui
   const apiKey = "AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c";
+  console.log({ sttInput });
 
   // ---- Gemini API
   async function generateContent() {
@@ -142,9 +145,11 @@ xmlns="http://www.w3.org/2000/svg"
       apiKey;
 
     const data = {
+      context:
+        "Sua função será corrigir o texto dos prompts enviados dentro das regras do idioma Português (pt-br). Responda de forma direta nesse formato: Texto corrigido: '', Ajustes Feitos: ['item 1', 'item 2', 'item 3']",
       contents: [
         {
-          parts: [{ text: "Explique em pt-br como funciona uma IA" }],
+          parts: [{ text: sttInput }],
         },
       ],
     };
@@ -187,7 +192,12 @@ xmlns="http://www.w3.org/2000/svg"
   };
 
   const stlInput = {
+    backgroundColor: "rgba(255,255,255,.1)",
+    padding: 10,
+    borderRadius: 10,
+    width: "60%",
     color: "white",
+    margin: 20,
   };
 
   const stlContainer = {
@@ -195,12 +205,18 @@ xmlns="http://www.w3.org/2000/svg"
     width: "100%",
     height: "100%",
     ...stlCenter,
-    backgroundColor: "#333",
+    backgroundColor: "#111",
   };
 
   return (
     <RN.View style={stlContainer}>
-      <RN.TextInput style={stlInput} />
+      <RN.TextInput
+        value={sttInput}
+        onChangeText={(val) => setInput(val)}
+        style={stlInput}
+        multiline={true}
+        numberOfLines={2}
+      />
       <RN.Pressable style={stlBtn} onPress={generateContent}>
         <RN.Text style={stlTxt}>GEMINI</RN.Text>
       </RN.Pressable>
