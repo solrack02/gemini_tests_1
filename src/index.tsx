@@ -150,13 +150,20 @@ xmlns="http://www.w3.org/2000/svg"
     };
 
     try {
-      await fetch(url, {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
+
+      if (!response.ok) {
+        throw new Error("Erro:" + response.status + response.statusText);
+      }
+
+      const result = await response.json();
+      console.log("Resultado da API:", result);
     } catch (error) {
       console.error("Erro na requisição:", error);
     }
