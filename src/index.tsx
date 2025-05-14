@@ -168,7 +168,7 @@ console.log({apiKey});
   return (
     <RN.View style={stlContainer}>
       <RN.TextInput style={stlInput} />
-      <RN.Pressable style={stlBtn} onPress={() => {}}>
+      <RN.Pressable style={stlBtn} onPress={() => {console.log({apiKey});}}>
         <RN.Text style={stlTxt}>GEMINI</RN.Text>
       </RN.Pressable>
     </RN.View>
