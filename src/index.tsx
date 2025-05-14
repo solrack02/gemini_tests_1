@@ -135,6 +135,44 @@ xmlns="http://www.w3.org/2000/svg"
 const apiKey = "AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c";
 
 console.log({apiKey});
+
+// ---- Styles
+  const stlCenter = {
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const stlBtn = {
+    ...stlCenter,
+    backgroundColor: "darkcyan",
+    width: 100,
+    height: 24,
+  };
+
+  const stlTxt = {
+    color: "white",
+  };
+
+  const stlInput = {
+    color: "white",
+  };
+
+  const stlContainer = {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    ...stlCenter,
+    backgroundColor: "#333",
+  };
+
+  return (
+    <RN.View style={stlContainer}>
+      <RN.TextInput style={stlInput} />
+      <RN.Pressable style={stlBtn} onPress={() => {}}>
+        <RN.Text style={stlTxt}>GEMINI</RN.Text>
+      </RN.Pressable>
+    </RN.View>
+  );
 }],
 
           functions:[()=>{}],
