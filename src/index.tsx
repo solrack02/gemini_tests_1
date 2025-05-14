@@ -132,8 +132,9 @@ xmlns="http://www.w3.org/2000/svg"
             args,
           }}/>
         , () => {
+const apiKey = "AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c";
 
-  return <></>;
+console.log({apiKey});
 }],
 
           functions:[()=>{}],
