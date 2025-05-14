@@ -147,6 +147,8 @@ async function main() {
 
 await main();
 
+
+return <RN.Text>GEMINI</RN.Text>;
 }],
 
           functions:[()=>{}],
