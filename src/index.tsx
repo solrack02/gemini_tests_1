@@ -132,11 +132,37 @@ xmlns="http://www.w3.org/2000/svg"
             args,
           }}/>
         , () => {
-const apiKey = "AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c";
+  // ---- Sua Chave Gemini Aqui
+  const apiKey = "AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c";
 
-console.log({apiKey});
+  // ---- Gemini API
+  async function generateContent() {
+    const url =
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" +
+      apiKey;
 
-// ---- Styles
+    const data = {
+      contents: [
+        {
+          parts: [{ text: "Explique em pt-br como funciona uma IA" }],
+        },
+      ],
+    };
+
+    try {
+      await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+    }
+  }
+
+  // ---- Styles
   const stlCenter = {
     alignItems: "center",
     justifyContent: "center",
@@ -168,7 +194,7 @@ console.log({apiKey});
   return (
     <RN.View style={stlContainer}>
       <RN.TextInput style={stlInput} />
-      <RN.Pressable style={stlBtn} onPress={() => {console.log({apiKey});}}>
+      <RN.Pressable style={stlBtn} onPress={generateContent}>
         <RN.Text style={stlTxt}>GEMINI</RN.Text>
       </RN.Pressable>
     </RN.View>
