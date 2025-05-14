@@ -132,8 +132,7 @@ xmlns="http://www.w3.org/2000/svg"
             args,
           }}/>
         , () => {
-
-import { GoogleGenAI } from "@google/genai";
+  const { GoogleGenAI } = await import('@google/genai');
 
 const ai = new GoogleGenAI({ apiKey: "AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c" });
 
