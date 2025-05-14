@@ -132,20 +132,7 @@ xmlns="http://www.w3.org/2000/svg"
             args,
           }}/>
         , () => {
-  const { GoogleGenAI } = await import('@google/genai');
-
-const ai = new GoogleGenAI({ apiKey: "AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c" });
-
-async function main() {
-  const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
-    contents: "Explain how AI works in a few words",
-  });
-  console.log("gemini res:",response.text);
-}
-
-await main();
-
+const apiKey = "AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c";
 
 return <RN.Text>GEMINI</RN.Text>;
 }],
