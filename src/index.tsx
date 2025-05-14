@@ -133,10 +133,19 @@ xmlns="http://www.w3.org/2000/svg"
           }}/>
         , () => {
   const [sttInput, setInput] = React.useState("");
+  const [sttResult, setResult] = React.useState({
+    correct_txt: "",
+    corrections: [],
+  });
+
+  const arrayCorrects = Object.values(sttResult.corrections);
+  console.log({ arrayCorrects });
+  const sizeCorrects = arrayCorrects.length;
+  console.log({ sizeCorrects });
 
   // ---- Sua Chave Gemini Aqui
   const apiKey = "AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c";
-  console.log({ sttInput });
+  // console.log({ sttInput });
 
   // ---- Gemini API
   async function generateContent() {
@@ -145,13 +154,25 @@ xmlns="http://www.w3.org/2000/svg"
       apiKey;
 
     const data = {
-      context:
-        "Sua função será corrigir o texto dos prompts enviados dentro das regras do idioma Português (pt-br). Responda de forma direta nesse formato: Texto corrigido: '', Ajustes Feitos: ['item 1', 'item 2', 'item 3']",
       contents: [
         {
           parts: [{ text: sttInput }],
         },
       ],
+      generationConfig: {
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: "OBJECT",
+          properties: {
+            correct_txt: { type: "STRING" },
+            corrections: {
+              type: "ARRAY",
+              items: { type: "STRING" },
+            },
+          },
+          propertyOrdering: ["correct_txt", "corrections"],
+        },
+      },
     };
 
     try {
@@ -168,7 +189,19 @@ xmlns="http://www.w3.org/2000/svg"
       }
 
       const result = await response.json();
+      const rawText = result.candidates[0].content.parts[0].text;
       console.log("Resultado da API:", result);
+
+      // Verificando se o conteúdo é uma string JSON
+      let parsedObject;
+      try {
+        parsedObject = JSON.parse(rawText);
+        console.log("Objeto convertido:", parsedObject);
+      } catch (e) {
+        console.error("Erro ao converter o texto em objeto:", e);
+      }
+
+      setResult(parsedObject);
     } catch (error) {
       console.error("Erro na requisição:", error);
     }
@@ -218,8 +251,22 @@ xmlns="http://www.w3.org/2000/svg"
         numberOfLines={2}
       />
       <RN.Pressable style={stlBtn} onPress={generateContent}>
-        <RN.Text style={stlTxt}>GEMINI</RN.Text>
+        <RN.Text style={stlTxt}>CORRIGIR</RN.Text>
       </RN.Pressable>
+
+      {sizeCorrects > 0 && (
+        <RN.View style={stlInput}>
+          <RN.Text style={stlTxt}>{sttResult.correct_txt}</RN.Text>
+          <RN.Text style={[stlTxt, { marginTop: 20 }]}>{"CORREÇÕES:"}</RN.Text>
+          <RN.FlatList
+            data={sttResult.corrections}
+            style={{ marginTop: 20 }}
+            renderItem={(props) => (
+              <RN.Text style={stlTxt}>{props.item}</RN.Text>
+            )}
+          />
+        </RN.View>
+      )}
     </RN.View>
   );
 }],
