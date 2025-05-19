@@ -67,6 +67,8 @@
             functions:[async (...args) =>
  functions.funcGroup({ args, pass:{
  arrFunctions: [async () => {
+const test1 = tools.getCtData('all');
+console.log({ test1 });
   const apiKey = 'AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c';
 
   async function generateContent() {
