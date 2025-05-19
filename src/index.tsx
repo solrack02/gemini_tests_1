@@ -131,144 +131,117 @@ xmlns="http://www.w3.org/2000/svg"
 
             args,
           }}/>
-        , () => {
-  const [sttInput, setInput] = React.useState("");
-  const [sttResult, setResult] = React.useState({
-    correct_txt: "",
-    corrections: [],
-  });
+        , async () => {
+  const apiKey = 'AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c';
 
-  const arrayCorrects = Object.values(sttResult.corrections);
-  console.log({ arrayCorrects });
-  const sizeCorrects = arrayCorrects.length;
-  console.log({ sizeCorrects });
-
-  // ---- Sua Chave Gemini Aqui
-  const apiKey = "AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c";
-  // console.log({ sttInput });
-
-  // ---- Gemini API
   async function generateContent() {
     const url =
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" +
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' +
       apiKey;
 
     const data = {
       contents: [
         {
-          parts: [{ text: sttInput }],
+          parts: [
+            {
+              text: 'Você deve gerar o conteúdo pra preencher as informações do youtube (Enviar Vídeo). Gere uma sugestão para Título, Descrição, Hashs e Imagem de Capa, conforme detalhes a seguir:',
+            },
+            { text: 'um vídeo sobre a vida animal' },
+          ],
         },
       ],
       generationConfig: {
-        responseMimeType: "application/json",
+        responseMimeType: 'application/json',
         responseSchema: {
-          type: "OBJECT",
+          type: 'OBJECT',
           properties: {
-            correct_txt: { type: "STRING" },
-            corrections: {
-              type: "ARRAY",
-              items: { type: "STRING" },
+            title: { type: 'STRING' },
+            description: { type: 'STRING' },
+            hashs: {
+              type: 'ARRAY',
+              items: { type: 'STRING' },
             },
           },
-          propertyOrdering: ["correct_txt", "corrections"],
+          propertyOrdering: ['title', 'description', 'hashs'],
         },
       },
     };
 
     try {
       const response = await fetch(url, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
 
       if (!response.ok) {
-        throw new Error("Erro:" + response.status + response.statusText);
+        throw new Error('Erro:' + response.status + response.statusText);
       }
 
       const result = await response.json();
       const rawText = result.candidates[0].content.parts[0].text;
-      console.log("Resultado da API:", result);
+      console.log('Resultado da API:', result);
 
       // Verificando se o conteúdo é uma string JSON
       let parsedObject;
       try {
         parsedObject = JSON.parse(rawText);
-        console.log("Objeto convertido:", parsedObject);
+        console.log('Objeto convertido:', parsedObject);
       } catch (e) {
-        console.error("Erro ao converter o texto em objeto:", e);
+        console.error('Erro ao converter o texto em objeto:', e);
       }
 
-      setResult(parsedObject);
+      // setResult(parsedObject);
+      return parsedObject;
     } catch (error) {
-      console.error("Erro na requisição:", error);
+      console.error('Erro na requisição:', error);
     }
   }
 
-  // ---- Styles
-  const stlCenter = {
-    alignItems: "center",
-    justifyContent: "center",
+  const generateImage = async () => {
+    const urlImg =
+      'https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=' +
+      apiKey;
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    const raw = JSON.stringify({
+      instances: [
+        {
+          prompt: 'A futuristic teddy bear flying in space.',
+        },
+      ],
+      parameters: {
+        sampleCount: 2,
+        personGeneration: 'allow_adult',
+        includeSafetyAttributes: true,
+        aspectRatio: '1:1',
+      },
+    });
+
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    return await fetch(urlImg, requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        console.log({ result });
+        // setImage(result);
+        return result;
+      })
+      .catch(error => console.error(error));
   };
 
-  const stlBtn = {
-    ...stlCenter,
-    backgroundColor: "darkcyan",
-    width: 100,
-    height: 24,
-  };
+  const content = await generateContent();
+  const imageContent = await generateImage();
 
-  const stlTxt = {
-    color: "white",
-  };
-
-  const stlInput = {
-    backgroundColor: "rgba(255,255,255,.1)",
-    padding: 10,
-    borderRadius: 10,
-    width: "60%",
-    color: "white",
-    margin: 20,
-  };
-
-  const stlContainer = {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    ...stlCenter,
-    backgroundColor: "#111",
-  };
-
-  return (
-    <RN.View style={stlContainer}>
-      <RN.TextInput
-        value={sttInput}
-        onChangeText={(val) => setInput(val)}
-        style={stlInput}
-        multiline={true}
-        numberOfLines={2}
-      />
-      <RN.Pressable style={stlBtn} onPress={generateContent}>
-        <RN.Text style={stlTxt}>CORRIGIR</RN.Text>
-      </RN.Pressable>
-
-      {sizeCorrects > 0 && (
-        <RN.View style={stlInput}>
-          <RN.Text style={stlTxt}>{sttResult.correct_txt}</RN.Text>
-          <RN.Text style={[stlTxt, { marginTop: 20 }]}>{"CORREÇÕES:"}</RN.Text>
-          <RN.FlatList
-            data={sttResult.corrections}
-            style={{ marginTop: 20 }}
-            renderItem={(props) => (
-              <RN.Text style={stlTxt}>{props.item}</RN.Text>
-            )}
-          />
-        </RN.View>
-      )}
-    </RN.View>
-  );
+  console.log({ content, imageContent });
 }],
 
           functions:[()=>{}],
