@@ -67,11 +67,7 @@
             functions:[async (...args) =>
  functions.funcGroup({ args, pass:{
  arrFunctions: [async () => {
-const test1 = tools.getCtData('all');
-console.log({ test1 });
-
-tools.functions.setVar({ args: '',  pass: { keyPath: ['all.temp1'], value: [{teste: "1"}] } });
-
+  const path = 'all.temp1';
   const apiKey = 'AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c';
 
   async function generateContent() {
@@ -181,7 +177,10 @@ tools.functions.setVar({ args: '',  pass: { keyPath: ['all.temp1'], value: [{tes
   const content = await generateContent();
   const imageContent = await generateImage();
 
-  console.log({ content, imageContent });
+  tools.functions.setVar({
+    args: '',
+    pass: { keyPath: [path], value: [{ content, imageContent }] },
+  });
 }]
  , trigger: 'on press'
 }})],            childrenItems:[(...args:any) => <Elements.SvgView1 pass={{
