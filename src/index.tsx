@@ -70,7 +70,8 @@
 const test1 = tools.getCtData('all');
 console.log({ test1 });
 
-tools.base.functions.setVar( { pass: { variablePath: "all.test1"; variableValue: "1" } } );
+tools.base.functions.setVar( { pass: { variablePath: "all.test1", variableValue: "1" } } );
+
   const apiKey = 'AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c';
 
   async function generateContent() {
