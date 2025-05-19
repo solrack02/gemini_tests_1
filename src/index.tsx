@@ -67,120 +67,43 @@
             functions:[async (...args) =>
  functions.funcGroup({ args, pass:{
  arrFunctions: [async () => {
-  const path = 'all.temp1';
-  const apiKey = 'AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c';
-
-  async function generateContent() {
-    const url =
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' +
-      apiKey;
-
-    const data = {
-      contents: [
-        {
-          parts: [
-            {
-              text: 'Você deve gerar o conteúdo pra preencher as informações do youtube (Enviar Vídeo). Gere uma sugestão para Título, Descrição, Hashs e Imagem de Capa, conforme detalhes a seguir:',
-            },
-            { text: 'um vídeo sobre a vida animal' },
-          ],
-        },
-      ],
-      generationConfig: {
-        responseMimeType: 'application/json',
-        responseSchema: {
-          type: 'OBJECT',
-          properties: {
-            title: { type: 'STRING' },
-            description: { type: 'STRING' },
-            hashs: {
-              type: 'ARRAY',
-              items: { type: 'STRING' },
-            },
-          },
-          propertyOrdering: ['title', 'description', 'hashs'],
-        },
-      },
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error('Erro:' + response.status + response.statusText);
-      }
-
-      const result = await response.json();
-      const rawText = result.candidates[0].content.parts[0].text;
-      console.log('Resultado da API:', result);
-
-      // Verificando se o conteúdo é uma string JSON
-      let parsedObject;
-      try {
-        parsedObject = JSON.parse(rawText);
-        console.log('Objeto convertido:', parsedObject);
-      } catch (e) {
-        console.error('Erro ao converter o texto em objeto:', e);
-      }
-
-      // setResult(parsedObject);
-      return parsedObject;
-    } catch (error) {
-      console.error('Erro na requisição:', error);
-    }
-  }
-
-  const generateImage = async () => {
-    const urlImg =
-      'https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=' +
-      apiKey;
-    const myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-
-    const raw = JSON.stringify({
-      instances: [
-        {
-          prompt: 'A futuristic teddy bear flying in space.',
-        },
-      ],
-      parameters: {
-        sampleCount: 2,
-        personGeneration: 'allow_adult',
-        includeSafetyAttributes: true,
-        aspectRatio: '1:1',
-      },
-    });
-
-    const requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-
-    return await fetch(urlImg, requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        console.log({ result });
-        // setImage(result);
-        return result;
-      })
-      .catch(error => console.error(error));
-  };
-
-  const content = await generateContent();
-  const imageContent = await generateImage();
-
-  tools.functions.setVar({
-    args: '',
-    pass: { keyPath: [path], value: [{ content, imageContent }] },
-  });
+	const path = 'customs.geminiRes';
+	const apiKey = 'AIzaSyC8MD4ZTRedYmVIvwfAAVCX-OthA6QQ37c';
+	async function generateContent() {
+		const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + apiKey;
+		const data = { contents: [{ parts: [{ text: 'Você deve gerar o conteúdo pra preencher as informações do youtube (Enviar Vídeo). Gere uma sugestão para Título, Descrição, Hashs e Imagem de Capa, conforme detalhes a seguir:' }, { text: 'um vídeo sobre a vida animal' }] }], generationConfig: { responseMimeType: 'application/json', responseSchema: { type: 'OBJECT', properties: { title: { type: 'STRING' }, description: { type: 'STRING' }, hashs: { type: 'ARRAY', items: { type: 'STRING' } } }, propertyOrdering: ['title', 'description', 'hashs'] } } };
+		try {
+			const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+			if (!response.ok) { throw new Error('Erro:' + response.status + response.statusText); }
+			const result = await response.json();
+			const rawText = result.candidates[0].content.parts[0].text;
+			console.log('Resultado da API:', result);
+			let parsedObject;
+			try {
+				parsedObject = JSON.parse(rawText);
+				console.log('Objeto convertido:', parsedObject);
+			} catch (e) {
+				console.error('Erro ao converter o texto em objeto:', e);
+			}
+			return parsedObject;
+		} catch (error) {
+			console.error('Erro na requisição:', error);
+		}
+	}
+	const generateImage = async () => {
+		const urlImg = 'https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=' + apiKey;
+		const myHeaders = new Headers();
+		myHeaders.append('Content-Type', 'application/json');
+		const raw = JSON.stringify({ instances: [{ prompt: 'A futuristic teddy bear flying in space.' }], parameters: { sampleCount: 2, personGeneration: 'allow_adult', includeSafetyAttributes: true, aspectRatio: '1:1' } });
+		const requestOptions = { method: 'POST', headers: myHeaders, body: raw, redirect: 'follow' };
+		return await fetch(urlImg, requestOptions)
+			.then(response => response.text())
+			.then(result => { console.log({ result }); return result; })
+			.catch(error => console.error(error));
+	};
+	const content = await generateContent();
+	const imageContent = await generateImage();
+	tools.functions.setVar({ args: '', pass: { keyPath: [path], value: [{ content, imageContent }] } });
 }]
  , trigger: 'on press'
 }})],            childrenItems:[(...args:any) => <Elements.SvgView1 pass={{
