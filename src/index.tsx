@@ -295,6 +295,7 @@ finalResult = res1;
   console.log( res2 );
 finalResult = res2;
 }
+console.log({finalResult});
 
  const pass1 = { keyPath: [path2], value: [finalResult] };
  tools.functions.setVar({ args: '', pass: pass1 });
