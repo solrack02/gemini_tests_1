@@ -322,10 +322,10 @@ if (resultado >= 0) {
           funcsArray: [async (...args) =>
         functions.setVar({ args, pass:{
           keyPath: [`all.forms.form1.edu`],
-          value: [(val) => {
+          value: [((val) => {
   console.log({val});
 
-}]
+})()]
         }})],
 
           args,
