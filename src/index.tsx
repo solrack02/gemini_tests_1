@@ -322,23 +322,7 @@ if (resultado >= 0) {
           funcsArray: [async (...args) =>
         functions.setVar({ args, pass:{
           keyPath: [`all.forms.form1.edu`],
-          value: [(val) => {
-  const fieldVal = val[0];
-  console.log({ fieldVal });
-
-// Garante que seja numérico antes de formatar
-  const number = typeof fieldVal === 'string' 
-    ? parseFloat(fieldVal.replace(',', '.')) 
-    : fieldVal;
-  
-  // Se o valor não é válido, retorna "R$ 0,00"
-  if (isNaN(number)) {
-    return 'R$ 0,00';
-  }
-
-  // Usa Intl.NumberFormat para formatar com separador de milhar e símbolo R$
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(number);
-}]
+          value: ['no value']
         }})],
 
           args,
