@@ -284,13 +284,12 @@ const irDevido = Math.max(0, (calcBase * (faixaEncontrada.aliquota / 100)) - fai
 
 const resultado = toNum(irRet) - irDevido;
 
-
-
 if (resultado >= 0) {
   console.log("Restituição: R$" + resultado.toFixed(2) );
 } else {
   console.log("Imposto a pagar: R$" +  Math.abs(resultado).toFixed(2) );
 }
+
 }]
  , trigger: 'on press'
 }})],            childrenItems:[(...args:any) => <Elements.Text pass={{
