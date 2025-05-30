@@ -269,6 +269,7 @@ xmlns="http://www.w3.org/2000/svg"
   const allVal = tools.getCtData(path1);
 
   const { rendTrib, desMed, irRet, edu, prev, dep } = allVal;
+console.log({irRet});
 
   const toNum = (str) => parseFloat((str || "0").replace(",", "."));
 
