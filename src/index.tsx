@@ -300,7 +300,7 @@ console.log({finalResult});
  const pass1 = { keyPath: [path2], value: [finalResult] };
  tools.functions.setVar({ args: '', pass: pass1 });
 
-
+tools.functions.goTo('scResultados');
 }]
  , trigger: 'on press'
 }})],            childrenItems:[(...args:any) => <Elements.Text pass={{
