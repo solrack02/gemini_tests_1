@@ -245,7 +245,7 @@ xmlns="http://www.w3.org/2000/svg"
 
           stylesArray: [`{ marginBottom: 20 }`],
 
-          path: [" "],
+          path: [`all.forms.form1.dep`],
 
           funcsArray: [async (...args) =>
         functions.setVar({ args, pass:{
