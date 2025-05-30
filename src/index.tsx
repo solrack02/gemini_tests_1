@@ -256,7 +256,6 @@ xmlns="http://www.w3.org/2000/svg"
 
           args,
         }}/>, 
-        
 
           (...args:any) => <Elements.DynView pass={{
             elementsProperties:['{}'],
@@ -312,21 +311,7 @@ if (resultado >= 0) {
 
             args,
           }}/>
-        , (...args:any) => <Elements.IptTxtEdit pass={{
-          propsArray: [{}],
-
-          stylesArray: [`{ marginBottom: 20 }`],
-
-          path: [`all.forms.form1.edu`],
-
-          funcsArray: [async (...args) =>
-        functions.setVar({ args, pass:{
-          keyPath: [`all.forms.form1.edu`],
-          value: ['no value']
-        }})],
-
-          args,
-        }}/>],
+        ],
 
           functions:[()=>{}],
 
