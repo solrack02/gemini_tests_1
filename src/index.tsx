@@ -260,7 +260,7 @@ xmlns="http://www.w3.org/2000/svg"
           (...args:any) => <Elements.DynView pass={{
             elementsProperties:['{}'],
 
-            styles:[`{ backgroundColor: "darkBlue", paddingVertical: 5, paddingHorizontal: 16 }`],
+            styles:[`{ backgroundColor: "blue", width: 80, height: 25, paddingVertical: 5, paddingHorizontal: 16, alignItems: "center", justifyContent: "center" }`],
 
             functions:[()=>{}],            childrenItems:[(...args:any) => <Elements.Text pass={{
           arrProps: [
@@ -268,7 +268,7 @@ xmlns="http://www.w3.org/2000/svg"
           ],
 
           arrStyles: [
-            { color: 'black', fontSize: 12, }
+            `{ color: "#FFF" }`
           ],
 
           children: [
