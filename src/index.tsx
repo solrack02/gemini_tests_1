@@ -286,7 +286,11 @@ const resultado = toNum(irRet) - irDevido;
 
 
 
-  console.log({ irDevido, resultado });
+if (resultado >= 0) {
+  console.log('Restituição: R + resultado.toFixed(2) );
+} else {
+  console.log('Imposto a pagar: R +  Math.abs(resultado).toFixed(2) );
+}
 }]
  , trigger: 'on press'
 }})],            childrenItems:[(...args:any) => <Elements.Text pass={{
