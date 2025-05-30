@@ -269,9 +269,12 @@ xmlns="http://www.w3.org/2000/svg"
   const allVal = tools.getCtData(path1);
   const { rendTrib,  desMed} = allVal;
   const { irRet, edu, prev, dep} = allVal;
+const toNum = (str) => parseFloat(str.replace(",", "."));
+
+ const totalDep = toNum(dep) * 2400;
 
 
-console.log({edu,prev,dep})
+console.log({dep, totalDep});
 }]
  , trigger: 'on press'
 }})],            childrenItems:[(...args:any) => <Elements.Text pass={{
