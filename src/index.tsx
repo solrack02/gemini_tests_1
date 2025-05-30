@@ -190,7 +190,7 @@ xmlns="http://www.w3.org/2000/svg"
 
           funcsArray: [async (...args) =>
         functions.setVar({ args, pass:{
-          keyPath: [`all.forms.form1.rendTrib`],
+          keyPath: [`all.forms.form1.desMed`],
           value: [`$arg_callback`]
         }})],
 
@@ -205,7 +205,7 @@ xmlns="http://www.w3.org/2000/svg"
 
           funcsArray: [async (...args) =>
         functions.setVar({ args, pass:{
-          keyPath: [`all.forms.form1.rendTrib`],
+          keyPath: [`all.forms.form1.edu`],
           value: [`$arg_callback`]
         }})],
 
@@ -220,7 +220,7 @@ xmlns="http://www.w3.org/2000/svg"
 
           funcsArray: [async (...args) =>
         functions.setVar({ args, pass:{
-          keyPath: [`all.forms.form1.rendTrib`],
+          keyPath: [`all.forms.form1.prev`],
           value: [`$arg_callback`]
         }})],
 
@@ -235,7 +235,7 @@ xmlns="http://www.w3.org/2000/svg"
 
           funcsArray: [async (...args) =>
         functions.setVar({ args, pass:{
-          keyPath: [`all.forms.form1.rendTrib`],
+          keyPath: [`all.forms.form1.irRet`],
           value: [`$arg_callback`]
         }})],
 
@@ -249,7 +249,7 @@ xmlns="http://www.w3.org/2000/svg"
 
           funcsArray: [async (...args) =>
         functions.setVar({ args, pass:{
-          keyPath: [`all.forms.form1.rendTrib`],
+          keyPath: [`all.forms.form1.dep`],
           value: [`$arg_callback`]
         }})],
 
