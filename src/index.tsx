@@ -324,7 +324,7 @@ if (resultado >= 0) {
           keyPath: [`all.forms.form1.edu`],
           value: [(val) => {
   const fieldVal = val[0];
-  console.log({ fieldVal  });
+  console.log({ fieldVal });
 
 // Garante que seja numérico antes de formatar
   const number = typeof fieldVal === 'string' 
