@@ -323,7 +323,7 @@ if (resultado >= 0) {
         functions.setVar({ args, pass:{
           keyPath: [`all.forms.form1.edu`],
           value: [(val) => {
-  console.log({val});
+  console.log({val: val[0]});
 
 return val[0];
 }]
