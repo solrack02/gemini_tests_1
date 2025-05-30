@@ -186,7 +186,7 @@ xmlns="http://www.w3.org/2000/svg"
 
           stylesArray: [`{ marginBottom: 20 }`],
 
-          path: [" "],
+          path: [`all.forms.form1.desMed`],
 
           funcsArray: [async (...args) =>
         functions.setVar({ args, pass:{
@@ -201,7 +201,7 @@ xmlns="http://www.w3.org/2000/svg"
 
           stylesArray: [`{ marginBottom: 20 }`],
 
-          path: [" "],
+          path: [`all.forms.form1.edu`],
 
           funcsArray: [async (...args) =>
         functions.setVar({ args, pass:{
@@ -216,7 +216,7 @@ xmlns="http://www.w3.org/2000/svg"
 
           stylesArray: [`{ marginBottom: 20 }`],
 
-          path: [" "],
+          path: [`all.forms.form1.prev`],
 
           funcsArray: [async (...args) =>
         functions.setVar({ args, pass:{
@@ -231,7 +231,7 @@ xmlns="http://www.w3.org/2000/svg"
 
           stylesArray: [`{ marginBottom: 20 }`],
 
-          path: [" "],
+          path: [`all.forms.form1.irRet`],
 
           funcsArray: [async (...args) =>
         functions.setVar({ args, pass:{
