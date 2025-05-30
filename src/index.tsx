@@ -277,7 +277,7 @@ xmlns="http://www.w3.org/2000/svg"
   const calcBase = toNum(rendTrib) - totalDed;
 
   console.log({ calcBase, totalDep });
-};]
+}]
  , trigger: 'on press'
 }})],            childrenItems:[(...args:any) => <Elements.Text pass={{
           arrProps: [
