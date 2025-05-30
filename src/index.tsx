@@ -264,7 +264,8 @@ xmlns="http://www.w3.org/2000/svg"
 
             functions:[async (...args) =>
  functions.funcGroup({ args, pass:{
- arrFunctions: [() => {
+ arrFunctions: [
+() => {
   const path1 = "all.forms.form1";
   const path2 = "sc.A1.results";
   const allVal = tools.getCtData(path1);
@@ -300,8 +301,13 @@ console.log({finalResult});
  const pass1 = { keyPath: [path2], value: [finalResult] };
  tools.functions.setVar({ args: '', pass: pass1 });
 
-tools.goTo('scResultados');
-}]
+
+}, 
+        (...args) => {
+          // ---------- get Function from A_Project Scope
+          return tools.goTo("scResultados");
+        }
+        ]
  , trigger: 'on press'
 }})],            childrenItems:[(...args:any) => <Elements.Text pass={{
           arrProps: [
