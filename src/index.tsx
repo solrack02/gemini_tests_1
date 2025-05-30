@@ -264,16 +264,15 @@ xmlns="http://www.w3.org/2000/svg"
 
             functions:[async (...args) =>
  functions.funcGroup({ args, pass:{
- arrFunctions: [
-() => {
-  const path1 = 'all.forms.form1';
-  const path2 = 'sc.A1.results';
+ arrFunctions: [() => {
+  const path1 = "all.forms.form1";
+  const path2 = "sc.A1.results";
   const allVal = tools.getCtData(path1);
 
   const { rendTrib, desMed, irRet, edu, prev, dep } = allVal;
-  console.log({ irRet });
+console.log({irRet});
 
-  const toNum = str => parseFloat((str || '0').replace(',', '.'));
+  const toNum = (str) => parseFloat((str || "0").replace(",", "."));
 
   const totalDep = toNum(dep) * 2400;
   const totalDed = toNum(desMed) + toNum(edu) + toNum(prev) + totalDep;
@@ -282,32 +281,27 @@ xmlns="http://www.w3.org/2000/svg"
   const tabelaIR = tools.getCtData('all.tabelaIR');
   const faixaEncontrada = tabelaIR.find(faixa => calcBase <= faixa.limite);
 
-  const irDevido = Math.max(
-    0,
-    calcBase * (faixaEncontrada.aliquota / 100) - faixaEncontrada.deducao,
-  );
+const irDevido = Math.max(0, (calcBase * (faixaEncontrada.aliquota / 100)) - faixaEncontrada.deducao);
 
-  const resultado = toNum(irRet) - irDevido;
+const resultado = toNum(irRet) - irDevido;
 
-  if (resultado >= 0) {
-    const res1 = "Restituição: R$" + resultado.toFixed(2);
-    console.log(res1);
+let finalResult;
+if (resultado >= 0) {
+const res1 = "Restituição: R$" + resultado.toFixed(2);
+  console.log( res1 );
+finalResult = res1;
+} else {
+  const res2 = "Imposto a pagar: R$" +  Math.abs(resultado).toFixed(2);
+  console.log( res2 );
+finalResult = res2;
+}
+console.log({finalResult});
 
-    const pass1 = { keyPath: [path2], value: [res1] };
-    tools.functions.setVar({ args: '', pass: pass1 });
-  } else {
-    const res2 = "Imposto a pagar: R$" + Math.abs(resultado).toFixed(2);
-    console.log(res2);
+ const pass1 = { keyPath: [path2], value: [finalResult] };
+ tools.functions.setVar({ args: '', pass: pass1 });
 
-    const pass1 = { keyPath: [path2], value: [res2] };
-    tools.functions.setVar({ args: '', pass: pass1 });
-  }
-}, 
-        (...args) => {
-          // ---------- get Function from A_Project Scope
-          return tools.goTo("scResultados");
-        }
-        ]
+tools.functions.goTo('scResultados');
+}]
  , trigger: 'on press'
 }})],            childrenItems:[(...args:any) => <Elements.Text pass={{
           arrProps: [
