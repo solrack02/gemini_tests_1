@@ -283,7 +283,7 @@ const irDevido = Math.max(0, (calcBase * (faixaEncontrada.aliquota / 100)) - fai
 
 
 
-  console.log({ calcBase, totalDep });
+  console.log({ irDevido });
 }]
  , trigger: 'on press'
 }})],            childrenItems:[(...args:any) => <Elements.Text pass={{
