@@ -274,16 +274,18 @@ xmlns="http://www.w3.org/2000/svg"
 
   const totalDep = toNum(dep) * 2400;
   const totalDed = toNum(desMed) + toNum(edu) + toNum(prev) + totalDep;
-  const calcBase = toNum(rendTrib) - totalDed;
+  const calcBase = Math.max(0, toNum(rendTrib) - totalDed);
 
   const tabelaIR = tools.getCtData('all.tabelaIR');
   const faixaEncontrada = tabelaIR.find(faixa => calcBase <= faixa.limite);
 
 const irDevido = Math.max(0, (calcBase * (faixaEncontrada.aliquota / 100)) - faixaEncontrada.deducao);
 
+const resultado = toNum(irRet) - irDevido;
 
 
-  console.log({ irDevido });
+
+  console.log({ irDevido, resultado });
 }]
  , trigger: 'on press'
 }})],            childrenItems:[(...args:any) => <Elements.Text pass={{
