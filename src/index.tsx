@@ -268,17 +268,16 @@ xmlns="http://www.w3.org/2000/svg"
   const path1 = "all.forms.form1";
   const allVal = tools.getCtData(path1);
 
-  const { rendTrib,  desMed} = allVal;
-  const { irRet, edu, prev, dep} = allVal;
+  const { rendTrib, desMed, irRet, edu, prev, dep } = allVal;
 
-  const toNum = (str) => parseFloat(str.replace(",", "."));
- const totalDep = toNum(dep) * 2400;
- const totalDed = toNum(desMed) + toNum(edu) + toNum(prev) + totalDep;
- const calcBase = toNum(rendTrib) - totalDed
+  const toNum = (str) => parseFloat((str || "0").replace(",", "."));
 
+  const totalDep = toNum(dep) * 2400;
+  const totalDed = toNum(desMed) + toNum(edu) + toNum(prev) + totalDep;
+  const calcBase = toNum(rendTrib) - totalDed;
 
-console.log({calcBase, totalDep});
-}]
+  console.log({ calcBase, totalDep });
+};]
  , trigger: 'on press'
 }})],            childrenItems:[(...args:any) => <Elements.Text pass={{
           arrProps: [
