@@ -325,7 +325,7 @@ if (resultado >= 0) {
           value: [(val) => {
   console.log({val});
 
-return val;
+return val[0];
 }]
         }})],
 
