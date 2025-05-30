@@ -290,13 +290,13 @@ xmlns="http://www.w3.org/2000/svg"
   const resultado = toNum(irRet) - irDevido;
 
   if (resultado >= 0) {
-    const res1 = 'Restituição: R + resultado.toFixed(2);
+    const res1 = "Restituição: R$" + resultado.toFixed(2);
     console.log(res1);
 
     const pass1 = { keyPath: [path2], value: [res1] };
     tools.functions.setVar({ args: '', pass: pass1 });
   } else {
-    const res2 = 'Imposto a pagar: R + Math.abs(resultado).toFixed(2);
+    const res2 = "Imposto a pagar: R$" + Math.abs(resultado).toFixed(2);
     console.log(res2);
 
     const pass1 = { keyPath: [path2], value: [res2] };
