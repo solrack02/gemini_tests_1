@@ -262,7 +262,19 @@ xmlns="http://www.w3.org/2000/svg"
 
             styles:[`{ backgroundColor: "blue", width: 80, height: 25, paddingVertical: 5, paddingHorizontal: 16, alignItems: "center", justifyContent: "center" }`],
 
-            functions:[()=>{}],            childrenItems:[(...args:any) => <Elements.Text pass={{
+            functions:[async (...args) =>
+ functions.funcGroup({ args, pass:{
+ arrFunctions: [() => {
+  const path1 = "all.forms.form1";
+  const allVal = tools.getCtData(path1);
+  const { rendTrib,  desMed} = allVal;
+  const { irRet, edu, prev, dep} = allVal;
+
+
+console.log({edu,prev,dep})
+}]
+ , trigger: 'on press'
+}})],            childrenItems:[(...args:any) => <Elements.Text pass={{
           arrProps: [
             '{}'
           ],
