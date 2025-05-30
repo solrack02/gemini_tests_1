@@ -297,7 +297,7 @@ finalResult = "Restituição: R$" + resultado.toFixed(2);
 finalResult = "Imposto a pagar: R$" +  Math.abs(resultado).toFixed(2);
 }
 
- const pass1 = { keyPath: [path2], value: [finalResult] };
+ const pass1 = { keyPath: [path2], value: [1] };
  tools.functions.setVar({ args: '', pass: pass1 });
 }, 
         (...args) => {
