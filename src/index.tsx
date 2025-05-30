@@ -29,7 +29,7 @@
         (...args: any) => <Elements.Screen3 pass={{
           pathScreen:"home",
 
-          styles:[`{ backgroundColor: "#FFF", flex: 1, alignItems: "center", justifyContent: "center" }`],
+          styles:[`{ backgroundColor: "#FFF", flex: 1, alignItems: "center", justifyContent: "start" }`],
 
           screenElements:[
         
