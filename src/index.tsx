@@ -276,6 +276,13 @@ xmlns="http://www.w3.org/2000/svg"
   const totalDed = toNum(desMed) + toNum(edu) + toNum(prev) + totalDep;
   const calcBase = toNum(rendTrib) - totalDed;
 
+  const tabelaIR = tools.getCtData('all.tabelaIR');
+  const faixaEncontrada = tabelaIR.find(faixa => calcBase <= faixa.limite);
+
+const irDevido = Math.max(0, (calcBase * (faixaEncontrada.aliquota / 100)) - faixaEncontrada.deducao);
+
+
+
   console.log({ calcBase, totalDep });
 }]
  , trigger: 'on press'
