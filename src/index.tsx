@@ -331,8 +331,8 @@ console.log({finalResult});
           }}/>
         , () => {
   const [userName, setUserName] = useState("");
-  const [userPassword, setUserPassword] = useState("");
-  const [mensagemErro, setMensagemErro] = useState("");
+  const [userPassword, setUserPassword] = React.useState("");
+  const [mensagemErro, setMensagemErro] = React.useState("");
   const handleLogin = () => {
     if (!userName.trim()) {
       setMensagemErro("O nome de usuário precisa ser preenchido.");
