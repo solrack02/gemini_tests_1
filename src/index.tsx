@@ -330,16 +330,14 @@ console.log({finalResult});
             args,
           }}/>
         , () => {
-  const [userName, setUserName] = React.useState("");
-  const [userPassword, setUserPassword] = React.useState("");
-  const [mensagemErro, setMensagemErro] = React.useState("");
-
+  const [userName, setUserName] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [mensagemErro, setMensagemErro] = useState("");
   const handleLogin = () => {
     if (!userName.trim()) {
       setMensagemErro("O nome de usuário precisa ser preenchido.");
       return;
     }
-
     if (!userPassword.trim()) {
       setMensagemErro("A senha precisa ser preenchida.");
       return;
@@ -348,34 +346,74 @@ console.log({finalResult});
     // Se passou na validação
     setMensagemErro("");
     console.log("Login realizado com sucesso!");
-   // setVar aqui
   };
 
-const styles = {
-input: {},
-};
-
   return (
-    <RN.View style={styles.container}>
+    <RN.View
+      style={{
+        padding: 20,
+        alignItems: "stretch",
+        justifyContent: "center",
+      }}
+    >
       <RN.TextInput
         placeholder="Nome de usuário"
-        style={styles.input}
+        style={{
+          borderWidth: 1,
+          borderColor: "#ccc",
+          paddingVertical: 10,
+          paddingHorizontal: 15,
+          borderRadius: 8,
+          marginBottom: 10,
+        }}
         value={userName}
         onChangeText={setUserName}
       />
 
       <RN.TextInput
         placeholder="Senha"
-        style={styles.input}
+        style={{
+          borderWidth: 1,
+          borderColor: "#ccc",
+          paddingVertical: 10,
+          paddingHorizontal: 15,
+          borderRadius: 8,
+          marginBottom: 10,
+        }}
         value={userPassword}
         onChangeText={setUserPassword}
         secureTextEntry
       />
 
-      {mensagemErro !== "" && <RN.Text style={styles.erro}>{mensagemErro}</RN.Text>}
+      {mensagemErro !== "" && (
+        <RN.Text
+          style={{
+            color: "red",
+            marginBottom: 10,
+          }}
+        >
+          {mensagemErro}
+        </RN.Text>
+      )}
 
-      <RN.Pressable style={styles.botao} onPress={handleLogin}>
-        <RN.Text style={styles.textoBotao}>Login</RN.Text>
+      <RN.Pressable
+        style={{
+          backgroundColor: "#007BFF",
+          paddingVertical: 12,
+          paddingHorizontal: 24,
+          borderRadius: 8,
+          alignItems: "center",
+        }}
+        onPress={handleLogin}
+      >
+        <RN.Text
+          style={{
+            color: "#FFFFFF",
+            fontSize: 16,
+          }}
+        >
+          Login
+        </RN.Text>
       </RN.Pressable>
     </RN.View>
   );
