@@ -352,15 +352,15 @@ console.log({finalResult});
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
+    <RN.View style={styles.container}>
+      <RN.TextInput
         placeholder="Nome de usuário"
         style={styles.input}
         value={userName}
         onChangeText={setUserName}
       />
 
-      <TextInput
+      <RN.TextInput
         placeholder="Senha"
         style={styles.input}
         value={userPassword}
@@ -368,12 +368,12 @@ console.log({finalResult});
         secureTextEntry
       />
 
-      {mensagemErro !== "" && <Text style={styles.erro}>{mensagemErro}</Text>}
+      {mensagemErro !== "" && <RN.Text style={styles.erro}>{mensagemErro}</RN.Text>}
 
-      <Pressable style={styles.botao} onPress={handleLogin}>
-        <Text style={styles.textoBotao}>Login</Text>
-      </Pressable>
-    </View>
+      <RN.Pressable style={styles.botao} onPress={handleLogin}>
+        <RN.Text style={styles.textoBotao}>Login</RN.Text>
+      </RN.Pressable>
+    </RN.View>
   );
 }],
 
