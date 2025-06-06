@@ -256,6 +256,7 @@ xmlns="http://www.w3.org/2000/svg"
 
           args,
         }}/>, 
+        
 
           (...args:any) => <Elements.DynView pass={{
             elementsProperties:['{}'],
@@ -328,7 +329,53 @@ console.log({finalResult});
 
             args,
           }}/>
-        ],
+        , () => {
+  const [userName, setUserName] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [mensagemErro, setMensagemErro] = useState("");
+
+  const handleLogin = () => {
+    if (!userName.trim()) {
+      setMensagemErro("O nome de usuário precisa ser preenchido.");
+      return;
+    }
+
+    if (!userPassword.trim()) {
+      setMensagemErro("A senha precisa ser preenchida.");
+      return;
+    }
+
+    // Se passou na validação
+    setMensagemErro("");
+    console.log("Login realizado com sucesso!");
+   // setVar aqui
+  };
+
+  return (
+    <View style={styles.container}>
+      <TextInput
+        placeholder="Nome de usuário"
+        style={styles.input}
+        value={userName}
+        onChangeText={setUserName}
+      />
+
+      <TextInput
+        placeholder="Senha"
+        style={styles.input}
+        value={userPassword}
+        onChangeText={setUserPassword}
+        secureTextEntry
+      />
+
+      {mensagemErro !== "" && <Text style={styles.erro}>{mensagemErro}</Text>}
+
+      <Pressable style={styles.botao} onPress={handleLogin}>
+        <Text style={styles.textoBotao}>Login</Text>
+      </Pressable>
+    </View>
+  );
+}],
 
           functions:[()=>{}],
 
