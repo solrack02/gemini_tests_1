@@ -351,6 +351,10 @@ console.log({finalResult});
    // setVar aqui
   };
 
+const styles = {
+input: {},
+};
+
   return (
     <RN.View style={styles.container}>
       <RN.TextInput
